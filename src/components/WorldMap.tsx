@@ -33,65 +33,20 @@ const WorldMap = () => {
     return colors[type as keyof typeof colors] || '#ffffff';
   };
 
-  // Create dotted world map pattern
-  const createDottedMap = () => {
-    const dots = [];
-    const mapWidth = 800;
-    const mapHeight = 400;
-    const dotSpacing = 8;
-    
-    // Define rough continent shapes with dots
-    const continentPatterns = [
-      // North America
-      { startX: 60, endX: 220, startY: 80, endY: 200, density: 0.7 },
-      // South America  
-      { startX: 140, endX: 200, startY: 200, endY: 320, density: 0.6 },
-      // Europe
-      { startX: 280, endX: 350, startY: 60, endY: 140, density: 0.8 },
-      // Africa
-      { startX: 280, endX: 360, startY: 140, endY: 300, density: 0.7 },
-      // Asia
-      { startX: 350, endX: 550, startY: 40, endY: 200, density: 0.8 },
-      // Australia
-      { startX: 500, endX: 580, startY: 250, endY: 300, density: 0.6 },
-    ];
-
-    continentPatterns.forEach((pattern, patternIndex) => {
-      for (let x = pattern.startX; x < pattern.endX; x += dotSpacing) {
-        for (let y = pattern.startY; y < pattern.endY; y += dotSpacing) {
-          if (Math.random() < pattern.density) {
-            dots.push(
-              <circle
-                key={`${patternIndex}-${x}-${y}`}
-                cx={x}
-                cy={y}
-                r="1"
-                fill="rgba(255, 255, 255, 0.3)"
-              />
-            );
-          }
-        }
-      }
-    });
-
-    return dots;
-  };
-
   return (
     <div className="relative w-full h-96 bg-black rounded-lg overflow-hidden flex items-center justify-center">
-      <svg 
-        width="100%" 
-        height="100%" 
-        viewBox="0 0 800 400"
-        className="absolute inset-0"
-      >
-        {createDottedMap()}
-      </svg>
+      {/* World Map Background Image */}
+      <img 
+        src="/lovable-uploads/503fd463-177b-4d06-8073-2d77401de0c3.png"
+        alt="World Map"
+        className="absolute inset-0 w-full h-full object-contain opacity-80"
+      />
       
+      {/* Transaction Dots */}
       {transactions.map((transaction) => (
         <div
           key={transaction.id}
-          className="absolute w-2 h-2 rounded-full animate-pulse"
+          className="absolute w-2 h-2 rounded-full animate-pulse z-10"
           style={{
             left: `${transaction.x}%`,
             top: `${transaction.y}%`,
